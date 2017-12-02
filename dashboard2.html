@@ -1,0 +1,1911 @@
+<html lang="en" data-ng-app="app" class="ng-scope"><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+  <meta charset="utf-8">
+  <title>Angular version | Angulr</title>
+  <meta name="description" content="Angularjs, Html5, Music, Landing, 4 in 1 ui kits package">
+  <meta name="keywords" content="AngularJS, angular, bootstrap, admin, dashboard, panel, app, charts, components,flat, responsive, layout, kit, ui, route, web, app, widgets">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="../libs/assets/animate.css/animate.css" type="text/css">
+  <link rel="stylesheet" href="../libs/assets/font-awesome/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="../libs/assets/simple-line-icons/css/simple-line-icons.css" type="text/css">
+  <link rel="stylesheet" href="../libs/jquery/bootstrap/dist/css/bootstrap.css" type="text/css">
+
+  <link rel="stylesheet" href="css/app.min.css">
+<script src="js/controllers/chart.js" async=""></script><style type="text/css" abt="234"></style><script>//console.log('a')
+</script><script>doAdblock();
+function doAdblock(){
+    (function() {
+        function A() {}
+        A.prototype = {
+            rules: {
+                'pps_pps': {
+                    'find': /^http:\/\/www\.iqiyi\.com\/player\/cupid\/common\/pps_flvplay_s\.swf/,
+                    'replace': 'http://swf.adtchrome.com/pps_20140420.swf'
+                },
+                '17173_in':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFile(Customer)?\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173_in_20150522.swf"
+                },
+                '17173_out':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/PreloaderFileFirstpage\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173_out_20150522.swf"
+                },
+                '17173_live':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream(_firstpage)?\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173_stream_20150522.swf"
+                },
+                '17173_live_out':{
+                    'find':/http:\/\/f\.v\.17173cdn\.com\/(\d+\/)?flash\/Player_stream_(custom)?Out\.swf/,
+                    'replace':"http://swf.adtchrome.com/17173.out.Live.swf"
+                }
+            },
+            _done: null,
+            get done() {
+                if(!this._done) {
+                    this._done = new Array();
+                }
+                return this._done;
+            },
+            addAnimations: function() {
+                var style = document.createElement('style');
+                style.type = 'text/css';
+                style.innerHTML = 'object,embed{\
+                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;\
+                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;\
+                -o-animation-duration:.001s;-o-animation-name:playerInserted;\
+                animation-duration:.001s;animation-name:playerInserted;}\
+                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}\
+                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}';
+                document.getElementsByTagName('head')[0].appendChild(style);
+            },
+            animationsHandler: function(e) {
+                if(e.animationName === 'playerInserted') {
+                    this.replace(e.target);
+                }
+            },
+            replace: function(elem) {
+                if (/http:\/\/v.youku.com\/v_show\/.*/.test(window.location.href)){
+                    var tag = document.getElementById("playerBox").getAttribute("player")
+                    if (tag == "adt"){
+                        console.log("adt adv")
+                        return;
+                    }
+                }
+                if(this.done.indexOf(elem) != -1) return;
+                this.done.push(elem);
+                var player = elem.data || elem.src;
+                if(!player) return;
+                var i, find, replace = false;
+                for(i in this.rules) {
+                    find = this.rules[i]['find'];
+                    if(find.test(player)) {
+                        replace = this.rules[i]['replace'];
+                        if('function' === typeof this.rules[i]['preHandle']) {
+                            this.rules[i]['preHandle'].bind(this, elem, find, replace, player)();
+                        }else{
+                            this.reallyReplace.bind(this, elem, find, replace)();
+                        }
+                        break;
+                    }
+                }
+            },
+            reallyReplace: function(elem, find, replace) {
+                elem.data && (elem.data = elem.data.replace(find, replace)) || elem.src && ((elem.src = elem.src.replace(find, replace)) && (elem.style.display = 'block'));
+                var b = elem.querySelector("param[name='movie']");
+                this.reloadPlugin(elem);
+            },
+            reloadPlugin: function(elem) {
+                var nextSibling = elem.nextSibling;
+                var parentNode = elem.parentNode;
+                parentNode.removeChild(elem);
+                var newElem = elem.cloneNode(true);
+                this.done.push(newElem);
+                if(nextSibling) {
+                    parentNode.insertBefore(newElem, nextSibling);
+                } else {
+                    parentNode.appendChild(newElem);
+                }
+            },
+            init: function() {
+                var handler = this.animationsHandler.bind(this);
+                document.body.addEventListener('webkitAnimationStart', handler, false);
+                document.body.addEventListener('msAnimationStart', handler, false);
+                document.body.addEventListener('oAnimationStart', handler, false);
+                document.body.addEventListener('animationstart', handler, false);
+                this.addAnimations();
+            }
+        };
+        new A().init();
+    })();
+}
+// 20140730
+(function cnbeta() {
+    if (document.URL.indexOf('cnbeta.com') >= 0) {
+        var elms = document.body.querySelectorAll("p>embed");
+        Array.prototype.forEach.call(elms, function(elm) {
+            elm.style.marginLeft = "0px";
+        });
+    }
+})();
+//baidu
+if(document.URL.indexOf('www.baidu.com') >= 0){
+    if(document && document.getElementsByTagName && document.getElementById && document.body){
+        var aa = function(){
+            var all = document.body.querySelectorAll("#content_left div,#content_left table");
+            for(var i = 0; i < all.length; i++){
+                if(/display:\s?(table|block)\s!important/.test(all[i].getAttribute("style"))){all[i].style.display= "none";all[i].style.visibility='hidden';}
+            }
+            all = document.body.querySelectorAll('.result.c-container[id="1"]');
+            //if(all.length == 1) return;
+            for(var i = 0; i < all.length; i++){
+                if(all[i].innerHTML && all[i].innerHTML.indexOf('广告')>-1){
+                    all[i].style.display= "none";all[i].style.visibility='hidden';
+                }
+            }
+        }
+        aa();
+        document.getElementById('wrapper_wrapper').addEventListener('DOMSubtreeModified',aa)
+    };
+}
+// 20140922
+(function kill_360() {
+    if (document.URL.indexOf('so.com') >= 0) {
+        document.getElementById("e_idea_pp").style.display = none;
+    }
+})();
+if (document.URL.indexOf("tv.sohu.com") >= 0){
+    if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+}
+if (document.URL.indexOf("56.com") >= 0){
+    if (document.cookie.indexOf("fee_status=true")==-1){document.cookie='fee_status=true'};
+}
+if (document.URL.indexOf("iqiyi.com") >= 0){
+    if (document.cookie.indexOf("player_forcedType=h5_VOD")==-1){
+        document.cookie='player_forcedType=h5_VOD'
+        if(localStorage.reloadTime && Date.now() - parseInt(localStorage.reloadTime)<60000){
+            console.log('no reload')
+        }else{
+            location.reload()
+            localStorage.reloadTime = Date.now();
+        }
+    }
+}
+</script><style type="text/css">object,embed{                -webkit-animation-duration:.001s;-webkit-animation-name:playerInserted;                -ms-animation-duration:.001s;-ms-animation-name:playerInserted;                -o-animation-duration:.001s;-o-animation-name:playerInserted;                animation-duration:.001s;animation-name:playerInserted;}                @-webkit-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-ms-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @-o-keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}                @keyframes playerInserted{from{opacity:0.99;}to{opacity:1;}}</style><script src="js/app/todo/todo.js" async=""></script><script src="../libs/jquery/moment/moment.js" async=""></script><script src="js/app/note/note.js" async=""></script><script src="../libs/jquery/fullcalendar/dist/fullcalendar.min.js" async=""></script><link type="text/css" rel="stylesheet" href="../libs/jquery/fullcalendar/dist/fullcalendar.css"><link type="text/css" rel="stylesheet" href="../libs/jquery/fullcalendar/dist/fullcalendar.theme.css"><script src="../libs/angular/angular-ui-calendar/src/calendar.js" async=""></script><script src="js/app/calendar/calendar.js" async=""></script><style type="text/css">.jqstooltip { position: absolute;left: 0px;top: 0px;visibility: hidden;background: rgb(0, 0, 0) transparent;background-color: rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";color: white;font: 10px arial, san serif;text-align: left;white-space: nowrap;padding: 5px;border: 1px solid white;z-index: 10000;}.jqsfield { color: white;font: 10px arial, san serif;text-align: left;}</style><script src="js/controllers/tab.js" async=""></script><link rel="stylesheet" type="text/css" href="../libs/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.css"><link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css"></head>
+<body ng-controller="AppCtrl" class="ng-scope">
+  <!-- uiView:  --><div class="app ng-scope app-header-fixed app-aside-fixed" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view="" style="">  <!-- navbar -->
+  <!-- ngInclude: 'tpl/blocks/header.html' --><div data-ng-include=" 'tpl/blocks/header.html' " class="app-header navbar ng-scope">      <!-- navbar header -->
+      <div class="navbar-header bg-danger dker bg-gd">
+        <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
+          <i class="glyphicon glyphicon-cog"></i>
+        </button>
+        <button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".app-aside" ui-scroll-to="app">
+          <i class="glyphicon glyphicon-align-justify"></i>
+        </button>
+        <!-- brand -->
+        <a href="#/" class="navbar-brand text-lt">
+          <i class="fa fa-btc"></i>
+          <img src="img/logo.png" alt="." class="hide">
+          <span class="hidden-folded m-l-xs ng-binding">Angulr</span>
+        </a>
+        <!-- / brand -->
+      </div>
+      <!-- / navbar header -->
+
+      <!-- navbar collapse -->
+      <div class="collapse pos-rlt navbar-collapse box-shadow bg-danger dker bg-gd"><form class="navbar-form navbar-form-sm navbar-left shift ng-pristine ng-valid ng-scope in" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder ng-pristine ng-untouched ng-valid" placeholder="Search projects..." aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-740-7757" aria-invalid="false"><ul class="dropdown-menu ng-isolate-scope ng-hide" ng-show="isOpen()" ng-style="{top: position.top+'px', left: position.left+'px'}" style="display: block;;display: block;" role="listbox" aria-hidden="true" typeahead-popup="" id="typeahead-740-7757" matches="matches" active="activeIdx" select="select(activeIdx)" query="query" position="position">
+    <!-- ngRepeat: match in matches track by $index -->
+</ul>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </div>
+        </form><form class="navbar-form navbar-form-sm navbar-left shift ng-pristine ng-valid ng-scope in" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder ng-pristine ng-untouched ng-valid" placeholder="Search projects..." aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-630-8303" aria-invalid="false"><ul class="dropdown-menu ng-isolate-scope ng-hide" ng-show="isOpen()" ng-style="{top: position.top+'px', left: position.left+'px'}" style="display: block;;display: block;" role="listbox" aria-hidden="true" typeahead-popup="" id="typeahead-630-8303" matches="matches" active="activeIdx" select="select(activeIdx)" query="query" position="position">
+    <!-- ngRepeat: match in matches track by $index -->
+</ul>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </div>
+        </form><form class="navbar-form navbar-form-sm navbar-left shift ng-pristine ng-valid ng-scope in" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder ng-pristine ng-untouched ng-valid" placeholder="Search projects..." aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-407-5097" aria-invalid="false"><ul class="dropdown-menu ng-isolate-scope ng-hide" ng-show="isOpen()" ng-style="{top: position.top+'px', left: position.left+'px'}" style="display: block;;display: block;" role="listbox" aria-hidden="true" typeahead-popup="" id="typeahead-407-5097" matches="matches" active="activeIdx" select="select(activeIdx)" query="query" position="position">
+    <!-- ngRepeat: match in matches track by $index -->
+</ul>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </div>
+        </form><form class="navbar-form navbar-form-sm navbar-left shift ng-pristine ng-valid ng-scope in" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder ng-pristine ng-untouched ng-valid" placeholder="Search projects..." aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-235-2173" aria-invalid="false"><ul class="dropdown-menu ng-isolate-scope ng-hide" ng-show="isOpen()" ng-style="{top: position.top+'px', left: position.left+'px'}" style="display: block;;display: block;" role="listbox" aria-hidden="true" typeahead-popup="" id="typeahead-235-2173" matches="matches" active="activeIdx" select="select(activeIdx)" query="query" position="position">
+    <!-- ngRepeat: match in matches track by $index -->
+</ul>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </div>
+        </form><form class="navbar-form navbar-form-sm navbar-left shift ng-pristine ng-valid ng-scope in" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder ng-pristine ng-untouched ng-valid" placeholder="Search projects..." aria-autocomplete="list" aria-expanded="false" aria-owns="typeahead-24-5450" aria-invalid="false"><ul class="dropdown-menu ng-isolate-scope ng-hide" ng-show="isOpen()" ng-style="{top: position.top+'px', left: position.left+'px'}" style="display: block;;display: block;" role="listbox" aria-hidden="true" typeahead-popup="" id="typeahead-24-5450" matches="matches" active="activeIdx" select="select(activeIdx)" query="query" position="position">
+    <!-- ngRepeat: match in matches track by $index -->
+</ul>
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+          </div>
+        </form>
+        <!-- buttons -->
+        <div class="nav navbar-nav hidden-xs">
+          <a href="" class="btn no-shadow navbar-btn" ng-click="app.settings.asideFolded = !app.settings.asideFolded">
+            <i class="fa fa-fw fa-dedent" style=""></i>
+          </a>
+          <a href="" class="btn no-shadow navbar-btn" ui-toggle-class="show" target="#aside-user">
+            <i class="icon-user fa-fw"></i>
+          </a>
+        </div>
+        <!-- / buttons -->
+
+        <!-- link and dropdown -->
+        <ul class="nav navbar-nav hidden-sm">
+          <li class="dropdown pos-stc" dropdown="">
+            <a href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+              <span>Mega</span>
+              <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu wrapper w-full bg-white">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold">Pages <span class="badge badge-sm bg-success">10</span></div>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <ul class="list-unstyled l-h-2x">
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Profile</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Post</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Search</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Invoice</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-xs-6">
+                      <ul class="list-unstyled l-h-2x">
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Price</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Lock screen</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Sign in</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Sign up</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 b-l b-light">
+                  <div class="m-l-xs m-t-xs m-b-xs font-bold">UI Kits <span class="label label-sm bg-primary">12</span></div>
+                  <div class="row">
+                    <div class="col-xs-6">
+                      <ul class="list-unstyled l-h-2x">
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Buttons</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Icons <span class="badge badge-sm bg-warning">1000+</span></a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Grid</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Widgets</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-xs-6">
+                      <ul class="list-unstyled l-h-2x">
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Bootstap</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Sortable</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Portlet</a>
+                        </li>
+                        <li>
+                          <a href=""><i class="fa fa-fw fa-angle-right text-muted m-r-xs"></i>Timeline</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-4 b-l b-light">
+                  <div class="m-l-xs m-t-xs m-b-sm font-bold">Analysis</div>
+                  <div class="text-center">
+                    <div class="inline">
+                      <div ui-jq="easyPieChart" ui-options="{
+                          percent: 65,
+                          lineWidth: 50,
+                          trackColor: '#e8eff0',
+                          barColor: '#23b7e5',
+                          scaleColor: false,
+                          size: 100,
+                          rotate: 90,
+                          lineCap: 'butt',
+                          animate: 2000
+                        }" class="easyPieChart" style="width: 100px; height: 100px; line-height: 100px;">
+                      <canvas width="100" height="100"></canvas></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown" dropdown="">
+            <a href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
+              <span translate="header.navbar.new.NEW" class="ng-scope">New</span> <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#" translate="header.navbar.new.PROJECT" class="ng-scope">Projects</a></li>
+              <li>
+                <a href="">
+                  <span class="badge bg-info pull-right">5</span>
+                  <span translate="header.navbar.new.TASK" class="ng-scope">Task</span>
+                </a>
+              </li>
+              <li><a href="" translate="header.navbar.new.USER" class="ng-scope">User</a></li>
+              <li class="divider"></li>
+              <li>
+                <a href="">
+                  <span class="badge bg-danger pull-right">4</span>
+                  <span translate="header.navbar.new.EMAIL" class="ng-scope">Email</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <!-- / link and dropdown -->
+
+        <!-- search form -->
+
+        <!-- / search form -->
+
+        <!-- nabar right -->
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown hidden-sm" is-open="lang.isopen" dropdown="">
+            <a href="" class="dropdown-toggle ng-binding" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+              English <b class="caret"></b>
+            </a>
+            <!-- dropdown -->
+            <ul class="dropdown-menu animated fadeInRight w">
+              <!-- ngRepeat: (langKey, label) in langs --><li ng-repeat="(langKey, label) in langs" class="ng-scope">
+                <a ng-click="setLang(langKey, $event)" href="" class="ng-binding">English</a>
+              </li><!-- end ngRepeat: (langKey, label) in langs --><li ng-repeat="(langKey, label) in langs" class="ng-scope">
+                <a ng-click="setLang(langKey, $event)" href="" class="ng-binding">German</a>
+              </li><!-- end ngRepeat: (langKey, label) in langs --><li ng-repeat="(langKey, label) in langs" class="ng-scope">
+                <a ng-click="setLang(langKey, $event)" href="" class="ng-binding">Italian</a>
+              </li><!-- end ngRepeat: (langKey, label) in langs -->
+            </ul>
+            <!-- / dropdown -->
+          </li>
+          <li class="hidden-xs">
+            <a ui-fullscreen="" class=""><i class="fa fa-expand fa-fw text"></i><i class="fa fa-compress fa-fw text-active"></i></a>
+          </li>
+          <li class="dropdown" dropdown="">
+            <a href="" class="dropdown-toggle" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+              <i class="icon-bell fa-fw"></i>
+              <span class="visible-xs-inline">Notifications</span>
+              <span class="badge badge-sm up bg-danger pull-right-xs">2</span>
+            </a>
+            <!-- dropdown -->
+            <div class="dropdown-menu w-xl animated fadeInUp">
+              <div class="panel bg-white">
+                <div class="panel-heading b-light bg-light">
+                  <strong>You have <span>2</span> notifications</strong>
+                </div>
+                <div class="list-group">
+                  <a href="" class="list-group-item">
+                    <span class="pull-left m-r thumb-sm">
+                      <img src="img/a0.jpg" alt="..." class="img-circle">
+                    </span>
+                    <span class="clear block m-b-none">
+                      Use awesome animate.css<br>
+                      <small class="text-muted">10 minutes ago</small>
+                    </span>
+                  </a>
+                  <a href="" class="list-group-item">
+                    <span class="clear block m-b-none">
+                      1.0 initial released<br>
+                      <small class="text-muted">1 hour ago</small>
+                    </span>
+                  </a>
+                </div>
+                <div class="panel-footer text-sm">
+                  <a href="" class="pull-right"><i class="fa fa-cog"></i></a>
+                  <a href="#notes" data-toggle="class:show animated fadeInRight">See all the notifications</a>
+                </div>
+              </div>
+            </div>
+            <!-- / dropdown -->
+          </li>
+          <li class="dropdown" dropdown="">
+            <a href="" class="dropdown-toggle clear" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+              <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                <img src="img/a0.jpg" alt="...">
+                <i class="on md b-white bottom"></i>
+              </span>
+              <span class="hidden-sm hidden-md">John.Smith</span> <b class="caret"></b>
+            </a>
+            <!-- dropdown -->
+            <ul class="dropdown-menu animated fadeInRight w">
+              <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+                <div>
+                  <p>300mb of 500mb used</p>
+                </div>
+                <div class="progress-xs m-b-none bg-white progress ng-isolate-scope" value="60">
+  <div class="progress-bar" ng-class="type &amp;&amp; 'progress-bar-' + type" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{width: percent + '%'}" aria-valuetext="60%" ng-transclude="" style="width: 60%;"></div>
+</div>
+              </li>
+              <li>
+                <a href="">
+                  <span class="badge bg-danger pull-right">30%</span>
+                  <span>Settings</span>
+                </a>
+              </li>
+              <li>
+                <a ui-sref="app.page.profile" href="#/app/page/profile">Profile</a>
+              </li>
+              <li>
+                <a ui-sref="app.docs" href="#/app/docs">
+                  <span class="label bg-info pull-right">new</span>
+                  Help
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a ui-sref="access.signin" href="#/access/signin">Logout</a>
+              </li>
+            </ul>
+            <!-- / dropdown -->
+          </li>
+        </ul>
+        <!-- / navbar right -->
+
+      </div>
+      <!-- / navbar collapse -->
+</div>
+  <!-- / navbar -->
+
+  <!-- menu -->
+  <!-- ngInclude: 'tpl/blocks/aside.html' --><div data-ng-include=" 'tpl/blocks/aside.html' " class="app-aside hidden-xs bg-dark"><div class="aside-wrap ng-scope">
+  <!-- if you want to use a custom scroll when aside fixed, use the slimScroll
+    <div class="navi-wrap" ui-jq="slimScroll" ui-options="{height:'100%', size:'8px'}">
+  -->
+  <div class="navi-wrap">
+    <!-- user -->
+    <div class="clearfix hidden-xs text-center hide" id="aside-user">
+      <div class="dropdown wrapper" dropdown="">
+        <a ui-sref="app.page.profile" href="#/app/page/profile">
+          <span class="thumb-lg w-auto-folded avatar m-t-sm">
+            <img src="img/a0.jpg" class="img-full" alt="...">
+          </span>
+        </a>
+        <a href="" class="dropdown-toggle hidden-folded" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+          <span class="clear">
+            <span class="block m-t-sm">
+              <strong class="font-bold text-lt">John.Smith</strong>
+              <b class="caret"></b>
+            </span>
+            <span class="text-muted text-xs block">Art Director</span>
+          </span>
+        </a>
+        <!-- dropdown -->
+        <ul class="dropdown-menu animated fadeInRight w hidden-folded">
+          <li class="wrapper b-b m-b-sm bg-info m-t-n-xs">
+            <span class="arrow top hidden-folded arrow-info"></span>
+            <div>
+              <p>300mb of 500mb used</p>
+            </div>
+            <div class="progress-xs m-b-none dker progress ng-isolate-scope" value="60" type="white">
+  <div class="progress-bar progress-bar-white" ng-class="type &amp;&amp; 'progress-bar-' + type" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{width: percent + '%'}" aria-valuetext="60%" ng-transclude="" style="width: 60%;"></div>
+</div>
+          </li>
+          <li>
+            <a href="">Settings</a>
+          </li>
+          <li>
+            <a ui-sref="app.page.profile" href="#/app/page/profile">Profile</a>
+          </li>
+          <li>
+            <a href="">
+              <span class="badge bg-danger pull-right">3</span>
+              Notifications
+            </a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a ui-sref="access.signin" href="#/access/signin">Logout</a>
+          </li>
+        </ul>
+        <!-- / dropdown -->
+      </div>
+      <div class="line dk hidden-folded"></div>
+    </div>
+    <!-- / user -->
+
+    <!-- nav -->
+    <!-- ngInclude: 'tpl/blocks/nav.html' --><nav ui-nav="" class="navi clearfix ng-scope" ng-include="'tpl/blocks/nav.html'"><!-- list -->
+<ul class="nav ng-scope">
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.HEADER" class="ng-scope">Navigation</span>
+  </li>
+  <li class="">
+    <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
+      <span class="font-bold ng-scope" translate="aside.nav.DASHBOARD">Dashboard</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href="">
+          <span translate="aside.nav.DASHBOARD" class="ng-scope">Dashboard</span>
+        </a>
+      </li>
+      <li ui-sref-active="active" class="active">
+        <a ui-sref="app.dashboard-v1" href="#/app/dashboard-v1">
+          <span>Dashboard v1</span>
+        </a>
+      </li>
+      <li ui-sref-active="active" class="">
+        <a ui-sref="app.dashboard-v2" href="#/app/dashboard-v2">
+          <b class="label bg-info pull-right">N</b>
+          <span>Dashboard v2</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="app.calendar" href="#/app/calendar">
+      <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+      <span class="font-bold ng-scope" translate="aside.nav.CALENDAR">Calendar</span>
+    </a>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="app.mail.list" href="#/app/mail/inbox/">
+      <b class="badge bg-info pull-right">9</b>
+      <i class="glyphicon glyphicon-envelope icon text-info-lter"></i>
+      <span class="font-bold ng-scope" translate="aside.nav.EMAIL">Email</span>
+    </a>
+  </li>
+  <li>
+    <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-th-large icon text-success"></i>
+      <span class="font-bold">Apps</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href="">
+          <span>Apps</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.todo" href="#/app/todo">
+          <span>Todo</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="apps.note" href="#/apps/note">
+          <span>Note</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="apps.contact" href="#/apps/contact">
+          <span>Contacts</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.weather" href="#/app/weather">
+          <span>Weather</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+
+  <li class="line dk"></li>
+
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.components.COMPONENTS" class="ng-scope">Components</span>
+  </li>
+  <li>
+    <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <b class="badge bg-info pull-right">3</b>
+      <i class="glyphicon glyphicon-th"></i>
+      <span>Layout</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href="">
+          <span>Layout</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.app" href="#/layout/app">
+          <span>Application</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.fullwidth" href="#/layout/fullwidth">
+          <span>Full width</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="layout.mobile" href="#/layout/mobile">
+          <span>Mobile</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-class="{active:$state.includes('app.ui')}" class="">
+    <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-briefcase icon"></i>
+      <span translate="aside.nav.components.ui_kits.UI_KITS" class="ng-scope">UI Kits</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href="">
+          <span translate="aside.nav.components.ui_kits.UI_KITS" class="ng-scope">UI Kits</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.buttons" href="#/app/ui/buttons">
+          <span translate="aside.nav.components.ui_kits.BUTTONS" class="ng-scope">Buttons</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.icons" href="#/app/ui/icons">
+          <b class="badge bg-info pull-right">3</b>
+          <span translate="aside.nav.components.ui_kits.ICONS" class="ng-scope">Icons</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.grid" href="#/app/ui/grid">
+          <span translate="aside.nav.components.ui_kits.GRID" class="ng-scope">Grid</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.widgets" href="#/app/ui/widgets">
+          <b class="badge bg-success pull-right">13</b>
+          <span translate="aside.nav.WIDGETS" class="ng-scope">Widgets</span>
+        </a>
+      </li>
+      <li ui-sref-active="active" class="">
+        <a ui-sref="app.ui.bootstrap" href="#/app/ui/bootstrap">
+          <b class="badge bg-primary pull-right">16</b>
+          <span translate="aside.nav.components.ui_kits.BOOTSTRAP" class="ng-scope">Bootstrap</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.sortable" href="#/app/ui/sortable">
+          <span translate="aside.nav.components.ui_kits.SORTABLE" class="ng-scope">Sortable</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.scroll" href="#/app/ui/scroll">
+          <span>Scroll</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.portlet" href="#/app/ui/portlet">
+          <span translate="aside.nav.components.ui_kits.PORTLET" class="ng-scope">Portlet</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.timeline" href="#/app/ui/timeline">
+          <span translate="aside.nav.components.ui_kits.TIMELINE" class="ng-scope">Timeline</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.tree" href="#/app/ui/tree">
+          <span>Tree</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.ui.toaster" href="#/app/ui/toaster">
+          <span>Toaster</span>
+        </a>
+      </li>
+      <li>
+        <a href="" class="auto">
+          <span class="pull-right text-muted">
+            <i class="fa fa-fw fa-angle-right text"></i>
+            <i class="fa fa-fw fa-angle-down text-active"></i>
+          </span>
+          <b class="label bg-info pull-right">2</b>
+          <span>Maps</span>
+        </a>
+        <ul class="nav dker">
+          <li ui-sref-active="active">
+            <a ui-sref="app.ui.jvectormap" href="#/app/ui/jvectormap">
+              <span translate="aside.nav.components.ui_kits.VECTOR_MAP" class="ng-scope">Vector Map</span>
+            </a>
+          </li>
+          <li ui-sref-active="active">
+            <a ui-sref="app.ui.googlemap" href="#/app/ui/googlemap">
+              <span>Google Map</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li ng-class="{active:$state.includes('app.table')}">
+    <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <b class="label bg-primary pull-right">2</b>
+      <i class="glyphicon glyphicon-list"></i>
+      <span translate="aside.nav.components.table.TABLE" class="ng-scope">Table</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href="">
+          <span translate="aside.nav.components.table.TABLE" class="ng-scope">Table</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.table.static" href="#/app/table/static">
+          <span translate="aside.nav.components.table.TABLE_STATIC" class="ng-scope">Table static</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.table.datatable" href="#/app/table/datatable">
+          <span translate="aside.nav.components.table.DATATABLE" class="ng-scope">Datatable</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.table.footable" href="#/app/table/footable">
+          <span translate="aside.nav.components.table.FOOTABLE" class="ng-scope">Footable</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.table.grid" href="#/app/table/grid">
+          <span>ngGrid</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.table.uigrid" href="#/app/table/uigrid">
+          <span>uiGrid</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.table.smart" href="#/app/table/smart">
+          <span>Smart table</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.table.editable" href="#/app/table/editable">
+          <span>Editable</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ng-class="{active:$state.includes('app.form')}">
+    <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-edit"></i>
+      <span translate="aside.nav.components.form.FORM" class="ng-scope">Form</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href="">
+          <span translate="aside.nav.components.form.FORM" class="ng-scope">Form</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.form.elements" href="#/app/form/elements">
+          <span translate="aside.nav.components.form.FORM_ELEMENTS" class="ng-scope">Form elements</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.form.validation" href="#/app/form/validation">
+          <span translate="aside.nav.components.form.FORM_VALIDATION" class="ng-scope">Form validation</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.form.wizard" href="#/app/form/wizard">
+          <span translate="aside.nav.components.form.FORM_WIZARD" class="ng-scope">Form wizard</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.form.fileupload" href="#/app/form/fileupload">
+          <span>File upload</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.form.imagecrop" href="#/app/form/imagecrop">
+          <span>Image crop</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.form.select" href="#/app/form/select">
+          <span>Select</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.form.slider" href="#/app/form/slider">
+          <span>Slider</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.form.editor" href="#/app/form/editor">
+          <span>Editor</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.form.xeditable" href="#/app/form/xeditable">
+          <span>Xeditable</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="app.chart" href="#/app/chart">
+      <i class="glyphicon glyphicon-signal"></i>
+      <span translate="aside.nav.components.CHART" class="ng-scope">Chart</span>
+    </a>
+  </li>
+  <li ng-class="{active:$state.includes('app.page')}" class="">
+    <a href="" class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-file icon"></i>
+      <span translate="aside.nav.components.pages.PAGES" class="ng-scope">Pages</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href="">
+          <span translate="aside.nav.components.pages.PAGES" class="ng-scope">Pages</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.page.profile" href="#/app/page/profile">
+          <span translate="aside.nav.components.pages.PROFILE" class="ng-scope">Profile</span>
+        </a>
+      </li>
+      <li ui-sref-active="active" class="">
+        <a ui-sref="app.page.post" href="#/app/page/post">
+          <span translate="aside.nav.components.pages.POST" class="ng-scope">Post</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.page.search" href="#/app/page/search">
+          <span translate="aside.nav.components.pages.SEARCH" class="ng-scope">Search</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.page.invoice" href="#/app/page/invoice">
+          <span translate="aside.nav.components.pages.INVOICE" class="ng-scope">Invoice</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.page.price" href="#/app/page/price">
+          <span>Price</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="lockme" href="#/lockme">
+          <span translate="aside.nav.components.pages.LOCK_SCREEN" class="ng-scope">Lock screen</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="access.signin" href="#/access/signin">
+          <span translate="aside.nav.components.pages.SIGNIN" class="ng-scope">Signin</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="access.signup" href="#/access/signup">
+          <span translate="aside.nav.components.pages.SIGNUP" class="ng-scope">Signup</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="access.forgotpwd" href="#/access/forgotpwd">
+          <span translate="aside.nav.components.pages.FORGOT_PASSWORD" class="ng-scope">Forgot password</span>
+        </a>
+      </li>
+      <li>
+        <a ui-sref="access.404" href="#/access/404">
+          <span translate="aside.nav.components.pages.404" class="ng-scope">404</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+
+  <li class="line dk hidden-folded"></li>
+
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span translate="aside.nav.your_stuff.YOUR_STUFF" class="ng-scope">Your Stuff</span>
+  </li>
+  <li>
+    <a ui-sref="app.page.profile" href="#/app/page/profile">
+      <i class="icon-user icon text-success-lter"></i>
+      <b class="badge bg-success pull-right">30%</b>
+      <span translate="aside.nav.your_stuff.PROFILE" class="ng-scope">Profile</span>
+    </a>
+  </li>
+  <li>
+    <a ui-sref="app.docs" href="#/app/docs">
+      <i class="icon-question icon"></i>
+      <span translate="aside.nav.your_stuff.DOCUMENTS" class="ng-scope">Documents</span>
+    </a>
+  </li>
+</ul>
+<!-- / list -->
+</nav>
+    <!-- nav -->
+
+    <!-- aside footer -->
+    <div class="wrapper m-t">
+      <div class="text-center-folded">
+        <span class="pull-right pull-none-folded">60%</span>
+        <span class="hidden-folded ng-scope" translate="aside.MILESTONE">Milestone</span>
+      </div>
+      <div class="progress-xxs m-t-sm dk progress ng-isolate-scope" value="60" type="info">
+  <div class="progress-bar progress-bar-info" ng-class="type &amp;&amp; 'progress-bar-' + type" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" ng-style="{width: percent + '%'}" aria-valuetext="60%" ng-transclude="" style="width: 60%;"></div>
+</div>
+      <div class="text-center-folded">
+        <span class="pull-right pull-none-folded">35%</span>
+        <span class="hidden-folded ng-scope" translate="aside.RELEASE">Release</span>
+      </div>
+      <div class="progress-xxs m-t-sm dk progress ng-isolate-scope" value="35" type="primary">
+  <div class="progress-bar progress-bar-primary" ng-class="type &amp;&amp; 'progress-bar-' + type" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100" ng-style="{width: percent + '%'}" aria-valuetext="35%" ng-transclude="" style="width: 35%;"></div>
+</div>
+    </div>
+    <!-- / aside footer -->
+  </div>
+</div></div>
+  <!-- / menu -->
+
+  <!-- content -->
+  <div class="app-content ng-scope">
+    <div ui-butterbar="" class="butterbar hide"><span class="bar"></span></div>
+    <a href="" class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside"></a>
+    <!-- uiView:  --><div class="app-content-body fade-in-up ng-scope" ui-view=""><div class="hbox hbox-auto-xs hbox-auto-sm ng-scope" ng-init="
+    app.settings.asideFolded = false;
+    app.settings.asideDock = false;
+  ">
+  <!-- main -->
+  <div class="col">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+      <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <h1 class="m-n font-thin h3 text-black">Dashboard</h1>
+          <small class="text-muted">Welcome to angulr application</small>
+        </div>
+        <div class="col-sm-6 text-right hidden-xs">
+          <div class="inline m-r text-left">
+            <div class="m-b-xs">1290 <span class="text-muted">items</span></div>
+            <div ng-init="d3_1=[ 106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98 ]" ui-jq="sparkline" ui-options="[106,108,110,105,110,109,105,104,107,109,105,100,105,102,101,99,98], {type:'bar', height:20, barWidth:5, barSpacing:1, barColor:'#dce5ec'}" class="sparkline inline"><canvas width="101" height="20" style="display: inline-block; width: 101px; height: 20px; vertical-align: top;"></canvas></div>
+          </div>
+          <div class="inline text-left">
+            <div class="m-b-xs">$30,000 <span class="text-muted">revenue</span></div>
+            <div ng-init="d3_2=[ 105,102,106,107,105,104,101,99,98,109,105,100,108,110,105,110,109 ]" ui-jq="sparkline" ui-options="[105,102,106,107,105,104,101,99,98,109,105,100,108,110,105,110,109], {type:'bar', height:20, barWidth:5, barSpacing:1, barColor:'#dce5ec'}" class="sparkline inline"><canvas width="101" height="20" style="display: inline-block; width: 101px; height: 20px; vertical-align: top;"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / main header -->
+    <div class="wrapper-md ng-scope" ng-controller="FlotChartDemoCtrl">
+      <!-- stats -->
+      <div class="row">
+        <div class="col-md-5">
+          <div class="row row-sm text-center">
+            <div class="col-xs-6">
+              <div class="panel padder-v item">
+                <div class="h1 text-info font-thin h1">521</div>
+                <span class="text-muted text-xs">New items</span>
+                <div class="top text-right w-full">
+                  <i class="fa fa-caret-down text-warning m-r-sm"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <a href="" class="block panel padder-v bg-primary item">
+                <span class="text-white font-thin h1 block">930</span>
+                <span class="text-muted text-xs">Uploads</span>
+                <span class="bottom text-right w-full">
+                  <i class="fa fa-cloud-upload text-muted m-r-sm"></i>
+                </span>
+              </a>
+            </div>
+            <div class="col-xs-6">
+              <a href="" class="block panel padder-v bg-info item">
+                <span class="text-white font-thin h1 block">432</span>
+                <span class="text-muted text-xs">Comments</span>
+                <span class="top">
+                  <i class="fa fa-caret-up text-warning m-l-sm m-r-sm"></i>
+                </span>
+              </a>
+            </div>
+            <div class="col-xs-6">
+              <div class="panel padder-v item">
+                <div class="font-thin h1">129</div>
+                <span class="text-muted text-xs">Feeds</span>
+                <div class="bottom">
+                  <i class="fa fa-caret-up text-warning m-l-sm m-r-sm"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 m-b-md">
+              <div class="r bg-light dker item hbox no-border">
+                <div class="col w-xs v-middle hidden-md">
+                  <div ng-init="d3_3=[60,40]" ui-jq="sparkline" ui-options="[60,40], {type:'pie', height:40, sliceColors:['#fad733','#fff']}" class="sparkline inline"><canvas width="40" height="40" style="display: inline-block; width: 40px; height: 40px; vertical-align: top;"></canvas></div>
+                </div>
+                <div class="col dk padder-v r-r">
+                  <div class="text-primary-dk font-thin h1"><span>$12,670</span></div>
+                  <span class="text-muted text-xs">Revenue, 60% of the goal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="panel wrapper">
+            <label class="i-switch bg-warning pull-right" ng-init="showSpline=true">
+              <input type="checkbox" ng-model="showSpline" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="true" aria-invalid="false">
+              <i></i>
+            </label>
+            <h4 class="font-thin m-t-none m-b text-muted">Latest Campaign</h4>
+            <div ui-jq="plot" ui-refresh="showSpline" ui-options="[
+                { data: [[0,7],[1,6.5],[2,12.5],[3,7],[4,9],[5,6],[6,11],[7,6.5],[8,8],[9,7]], label:'TV', points: { show: true, radius: 1}, splines: { show: true, tension: 0.4, lineWidth: 1, fill: 0.8 } },
+                { data: [[0,4],[1,4.5],[2,7],[3,4.5],[4,3],[5,3.5],[6,6],[7,3],[8,4],[9,3]], label:'Mag', points: { show: true, radius: 1}, splines: { show: true, tension: 0.4, lineWidth: 1, fill: 0.8 } }
+              ],
+              {
+                colors: ['#23b7e5', '#7266ba'],
+                series: { shadowSize: 3 },
+                xaxis:{ font: { color: '#a1a7ac' } },
+                yaxis:{ font: { color: '#a1a7ac' }, max:20 },
+                grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#dce5ec' },
+                tooltip: true,
+                tooltipOpts: { content: 'Visits of %x.1 is %y.4',  defaultTheme: false, shifts: { x: 10, y: -25 } }
+              }" style="height: 246px; padding: 0px; position: relative;">
+            <canvas class="flot-base" width="298" height="246" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 298px; height: 246px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; max-width: 75px; top: 233px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 14px; text-align: center;">0</div><div style="position: absolute; max-width: 75px; top: 233px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 75px; text-align: center;">2</div><div style="position: absolute; max-width: 75px; top: 233px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 136px; text-align: center;">4</div><div style="position: absolute; max-width: 75px; top: 233px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 198px; text-align: center;">6</div><div style="position: absolute; max-width: 75px; top: 233px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 259px; text-align: center;">8</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; top: 222px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 6px; text-align: right;">0</div><div style="position: absolute; top: 166px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 6px; text-align: right;">5</div><div style="position: absolute; top: 111px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 0px; text-align: right;">10</div><div style="position: absolute; top: 56px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 0px; text-align: right;">15</div><div style="position: absolute; top: 1px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 0px; text-align: right;">20</div></div></div><canvas class="flot-overlay" width="298" height="246" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 298px; height: 246px;"></canvas><div class="legend"><div style="position: absolute; width: 43px; height: 44px; top: 12px; right: 11px; background-color: rgb(255, 255, 255); opacity: 0.85;"> </div><table style="position:absolute;top:12px;right:11px;;font-size:smaller;color:#dce5ec"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(35,183,229);overflow:hidden"></div></div></td><td class="legendLabel">TV</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(114,102,186);overflow:hidden"></div></div></td><td class="legendLabel">Mag</td></tr></tbody></table></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- / stats -->
+
+      <!-- service -->
+      <div class="panel hbox hbox-auto-xs no-border">
+        <div class="col wrapper">
+          <i class="fa fa-circle-o text-info m-r-sm pull-right"></i>
+          <h4 class="font-thin m-t-none m-b-none text-primary-lt">Managed Services</h4>
+          <span class="m-b block text-sm text-muted">Service report of this year (updated 1 hour ago)</span>
+          <div ui-jq="plot" ui-options="[
+              { data: [[0,49.92],[1,54.69],[2,55.11],[3,57.07],[4,58.73],[5,58.54],[6,63.52],[7,62.17],[8,63.91],[9,65.65],[10,62.84],[11,67.14],[12,69.31],[13,66.39],[14,69.61],[15,71.17],[16,66.56],[17,62.93],[18,62.32],[19,63.79],[20,66.84],[21,62.81],[22,63.41],[23,62.53],[24,63.84],[25,68.77],[26,66.47],[27,70.1],[28,69.4],[29,73.88],[30,71.41],[31,71.5],[32,72.88],[33,71.57],[34,75.69],[35,76.08],[36,79.86],[37,77.91],[38,76.29],[39,74.48],[40,73.59],[41,70.17],[42,71.35],[43,75.83],[44,72.64],[45,72.22],[46,76.05],[47,76.57],[48,76.71],[49,81.65],[50,77.45],[51,76.63],[52,77.8],[53,75.71],[54,76.89],[55,81.73],[56,77.81],[57,75.76],[58,75.22],[59,79.03],[60,80.86],[61,82.72],[62,80.48],[63,80.15],[64,79.07],[65,83.87],[66,81.86],[67,77.15],[68,73.5],[69,74.84],[70,78.62],[71,80.61],[72,82.41],[73,82.65],[74,83.4],[75,84.35],[76,85.41],[77,80.56],[78,81.11],[79,84.74],[80,80.15],[81,76.03],[82,77.98],[83,81.32],[84,77.24],[85,75.02],[86,79.44],[87,80.28],[88,78.49],[89,77.5],[90,74.57],[91,79.28],[92,79.37],[93,80.5],[94,83.97],[95,80.08],[96,80.57],[97,81.08],[98,79.86],[99,76.02],[100,74.36],[101,75.95],[102,74.21],[103,70.78],[104,74.92],[105,74.99],[106,70.51],[107,74.4],[108,70.98],[109,70.78],[110,69.02],[111,66.46],[112,67.97],[113,64.38],[114,68.48],[115,71.33],[116,70.06],[117,72.82],[118,76.97],[119,72],[120,75.88],[121,75.17],[122,75.05],[123,77.02],[124,80.31],[125,75.5],[126,71.01],[127,69.36],[128,65.97],[129,62.03],[130,61.65],[131,58.19],[132,59.17],[133,56.54],[134,53.23],[135,55.73],[136,57.32],[137,62.02],[138,60.15],[139,64.17],[140,65.66],[141,67.23],[142,63.13],[143,59.09],[144,61.07],[145,61.74],[146,62.73],[147,66.73],[148,70.47],[149,69.56]], lines: { show: true, lineWidth: 1, fill:true, fillColor: { colors: [{opacity: 0.2}, {opacity: 0.8}] } } }
+            ],
+            {
+              colors: ['#e8eff0'],
+              series: { shadowSize: 3 },
+              xaxis:{ show:false },
+              yaxis:{ font: { color: '#a1a7ac' } },
+              grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#dce5ec' },
+              tooltip: true,
+              tooltipOpts: { content: '%s of %x.1 is %y.4',  defaultTheme: false, shifts: { x: 10, y: -25 } }
+            }" style="height: 240px; padding: 0px; position: relative;">
+          <canvas class="flot-base" width="300" height="240" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 300px; height: 240px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div style="position: absolute; top: 226px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 11px; text-align: right;">0</div><div style="position: absolute; top: 181px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 5px; text-align: right;">20</div><div style="position: absolute; top: 136px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 5px; text-align: right;">40</div><div style="position: absolute; top: 91px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 5px; text-align: right;">60</div><div style="position: absolute; top: 46px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 5px; text-align: right;">80</div><div style="position: absolute; top: 2px; font-style: normal; font-variant: normal; font-weight: 400; font-stretch: normal; font-size: 11px; line-height: 13px; font-family: &quot;Source Sans Pro&quot;, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; color: rgb(161, 167, 172); left: 0px; text-align: right;">100</div></div></div><canvas class="flot-overlay" width="300" height="240" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 300px; height: 240px;"></canvas></div>
+        </div>
+        <div class="col wrapper-lg w-lg bg-light dk r-r">
+          <h4 class="font-thin m-t-none m-b">Reports</h4>
+          <div class="">
+            <div class="">
+              <span class="pull-right text-primary">60%</span>
+              <span>Consulting</span>
+            </div>
+            <div class="progress progress-xs m-t-sm bg-white">
+              <div class="progress-bar bg-primary" data-toggle="tooltip" data-original-title="60%" style="width: 60%"></div>
+            </div>
+            <div class="">
+              <span class="pull-right text-info">35%</span>
+              <span>Online tutorials</span>
+            </div>
+            <div class="progress progress-xs m-t-sm bg-white">
+              <div class="progress-bar bg-info" data-toggle="tooltip" data-original-title="35%" style="width: 35%"></div>
+            </div>
+            <div class="">
+              <span class="pull-right text-warning">25%</span>
+              <span>EDU management</span>
+            </div>
+            <div class="progress progress-xs m-t-sm bg-white">
+              <div class="progress-bar bg-warning" data-toggle="tooltip" data-original-title="23%" style="width: 25%"></div>
+            </div>
+          </div>
+          <p class="text-muted">Dales nisi nec adipiscing elit. Morbi id neque quam. Aliquam sollicitudin venenatis</p>
+        </div>
+      </div>
+      <!-- / service -->
+
+      <!-- tasks -->
+      <div class="panel wrapper">
+        <div class="row">
+          <div class="col-md-6 b-r b-light no-border-xs">
+            <a href="" class="text-muted pull-right text-lg"><i class="icon-arrow-right"></i></a>
+            <h4 class="font-thin m-t-none m-b-md text-muted">My Tasks</h4>
+            <div class=" m-b">
+              <div class="m-b">
+                <span class="label text-base bg-warning pos-rlt m-r"><i class="arrow right arrow-warning"></i> 19:30</span>
+                <a href="">Feed cat</a>
+              </div>
+              <div class="m-b">
+                <span class="label text-base bg-info pos-rlt m-r"><i class="arrow right arrow-info"></i> 12:30</span>
+                <a href="">Fishing Time</a>
+              </div>
+              <div class="m-b">
+                <span class="label text-base bg-primary pos-rlt m-r"><i class="arrow right arrow-primary"></i> 10:30</span>
+                <a href="">Kick-off meeting</a>
+              </div>
+              <div class="m-b">
+                <span class="label text-base bg-light pos-rlt m-r"><i class="arrow right arrow-light"></i> 07:30</span>
+                <a href="">Morning running</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="row row-sm">
+              <div class="col-xs-6 text-center">
+                <div ui-jq="easyPieChart" ui-options="{
+                    percent: 75,
+                    lineWidth: 4,
+                    trackColor: '#e8eff0',
+                    barColor: '#7266ba',
+                    scaleColor: false,
+                    size: 115,
+                    rotate: 90,
+                    lineCap: 'butt'
+                  }" class="inline m-t easyPieChart" style="width: 115px; height: 115px; line-height: 115px;">
+                  <div>
+                    <span class="text-primary h4">75%</span>
+                  </div>
+                <canvas width="115" height="115"></canvas></div>
+                <div class="text-muted font-bold text-xs m-t m-b">Work Done</div>
+              </div>
+              <div class="col-xs-6 text-center">
+                <div ui-jq="easyPieChart" ui-options="{
+                    percent: 50,
+                    lineWidth: 4,
+                    trackColor: '#e8eff0',
+                    barColor: '#23b7e5',
+                    scaleColor: false,
+                    size: 115,
+                    rotate: 180,
+                    lineCap: 'butt'
+                  }" class="inline m-t easyPieChart" style="width: 115px; height: 115px; line-height: 115px;">
+                  <div>
+                    <span class="text-info h4">50%</span>
+                  </div>
+                <canvas width="115" height="115"></canvas></div>
+                <div class="text-muted font-bold text-xs m-t m-b">Started</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / tasks -->
+
+      <!-- tasks -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel no-border">
+            <div class="panel-heading wrapper b-b b-light">
+              <span class="text-xs text-muted pull-right">
+                <i class="fa fa-circle text-primary m-r-xs"></i> 12
+                <i class="fa fa-circle text-info m-r-xs m-l-sm"></i> 30
+                <i class="fa fa-circle text-warning m-r-xs m-l-sm"></i> 98
+              </span>
+              <h4 class="font-thin m-t-none m-b-none text-muted">Teammates</h4>
+            </div>
+            <ul class="list-group list-group-lg m-b-none">
+              <li class="list-group-item">
+                <a href="" class="thumb-sm m-r">
+                  <img src="img/a1.jpg" class="r r-2x">
+                </a>
+                <span class="pull-right label bg-primary inline m-t-sm">Admin</span>
+                <a href="">Damon Parker</a>
+              </li>
+              <li class="list-group-item">
+                <a href="" class="thumb-sm m-r">
+                  <img src="img/a2.jpg" class="r r-2x">
+                </a>
+                <span class="pull-right label bg-info inline m-t-sm">Member</span>
+                <a href="">Joe Waston</a>
+              </li>
+              <li class="list-group-item">
+                <a href="" class="thumb-sm m-r">
+                  <img src="img/a3.jpg" class="r r-2x">
+                </a>
+                <span class="pull-right label bg-warning inline m-t-sm">Editor</span>
+                <a href="">Jannie Dvis</a>
+              </li>
+              <li class="list-group-item">
+                <a href="" class="thumb-sm m-r">
+                  <img src="img/a4.jpg" class="r r-2x">
+                </a>
+                <span class="pull-right label bg-warning inline m-t-sm">Editor</span>
+                <a href="">Emma Welson</a>
+              </li>
+            </ul>
+            <div class="panel-footer">
+              <span class="pull-right badge badge-bg m-t-xs">32</span>
+              <button class="btn btn-primary btn-addon btn-sm"><i class="fa fa-plus"></i>Add Teammate</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="list-group list-group-lg list-group-sp">
+            <a herf="" class="list-group-item clearfix">
+              <span class="pull-left thumb-sm avatar m-r">
+                <img src="img/a4.jpg" alt="...">
+                <i class="on b-white right"></i>
+              </span>
+              <span class="clear">
+                <span>Chris Fox</span>
+                <small class="text-muted clear text-ellipsis">What's up, buddy</small>
+              </span>
+            </a>
+            <a herf="" class="list-group-item clearfix">
+              <span class="pull-left thumb-sm avatar m-r">
+                <img src="img/a5.jpg" alt="...">
+                <i class="on b-white right"></i>
+              </span>
+              <span class="clear">
+                <span>Amanda Conlan</span>
+                <small class="text-muted clear text-ellipsis">Come online and we need talk about the plans that we have discussed</small>
+              </span>
+            </a>
+            <a herf="" class="list-group-item clearfix">
+              <span class="pull-left thumb-sm avatar m-r">
+                <img src="img/a6.jpg" alt="...">
+                <i class="busy b-white right"></i>
+              </span>
+              <span class="clear">
+                <span>Dan Doorack</span>
+                <small class="text-muted clear text-ellipsis">Hey, Some good news</small>
+              </span>
+            </a>
+            <a herf="" class="list-group-item clearfix">
+              <span class="pull-left thumb-sm avatar m-r">
+                <img src="img/a7.jpg" alt="...">
+                <i class="busy b-white right"></i>
+              </span>
+              <span class="clear">
+                <span>Lauren Taylor</span>
+                <small class="text-muted clear text-ellipsis">Nice to talk with you.</small>
+              </span>
+            </a>
+            <a herf="" class="list-group-item clearfix">
+              <span class="pull-left thumb-sm avatar m-r">
+                <img src="img/a8.jpg" alt="...">
+                <i class="away b-white right"></i>
+              </span>
+              <span class="clear">
+                <span>Mike Jackson</span>
+                <small class="text-muted clear text-ellipsis">This is nice</small>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- / tasks -->
+    </div>
+  </div>
+  <!-- / main -->
+  <!-- right col -->
+  <div class="col w-md bg-white-only b-l bg-auto no-border-xs">
+    <div class="nav-tabs-alt">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+          <a data-target="#tab-1" role="tab" data-toggle="tab">
+            <i class="glyphicon glyphicon-user text-md text-muted wrapper-sm"></i>
+          </a>
+        </li>
+        <li>
+          <a data-target="#tab-2" role="tab" data-toggle="tab">
+            <i class="glyphicon glyphicon-comment text-md text-muted wrapper-sm"></i>
+          </a>
+        </li>
+        <li>
+          <a data-target="#tab-3" role="tab" data-toggle="tab">
+            <i class="glyphicon glyphicon-transfer text-md text-muted wrapper-sm"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="tab-1">
+        <div class="wrapper-md">
+          <div class="m-b-sm text-md">Who to follow</div>
+          <ul class="list-group no-bg no-borders pull-in">
+            <li class="list-group-item">
+              <a herf="" class="pull-left thumb-sm avatar m-r">
+                <img src="img/a4.jpg" alt="..." class="img-circle">
+                <i class="on b-white bottom"></i>
+              </a>
+              <div class="clear">
+                <div><a href="">Chris Fox</a></div>
+                <small class="text-muted">Designer, Blogger</small>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <a herf="" class="pull-left thumb-sm avatar m-r">
+                <img src="img/a5.jpg" alt="..." class="img-circle">
+                <i class="on b-white bottom"></i>
+              </a>
+              <div class="clear">
+                <div><a href="">Mogen Polish</a></div>
+                <small class="text-muted">Writter, Mag Editor</small>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <a herf="" class="pull-left thumb-sm avatar m-r">
+                <img src="img/a6.jpg" alt="..." class="img-circle">
+                <i class="busy b-white bottom"></i>
+              </a>
+              <div class="clear">
+                <div><a href="">Joge Lucky</a></div>
+                <small class="text-muted">Art director, Movie Cut</small>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <a herf="" class="pull-left thumb-sm avatar m-r">
+                <img src="img/a7.jpg" alt="..." class="img-circle">
+                <i class="away b-white bottom"></i>
+              </a>
+              <div class="clear">
+                <div><a href="">Folisise Chosielie</a></div>
+                <small class="text-muted">Musician, Player</small>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <a herf="" class="pull-left thumb-sm avatar m-r">
+                <img src="img/a8.jpg" alt="..." class="img-circle">
+                <i class="away b-white bottom"></i>
+              </a>
+              <div class="clear">
+                <div><a href="">Aron Gonzalez</a></div>
+                <small class="text-muted">Designer</small>
+              </div>
+            </li>
+          </ul>
+          <div class="text-center">
+            <a href="" class="btn btn-sm btn-primary padder-md m-b">More Connections</a>
+          </div>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane tab-2" id="tab-2">
+        <div class="wrapper-md">
+          <div class="m-b-sm text-md">Chat</div>
+          <ul class="list-group no-borders pull-in auto">
+            <li class="list-group-item">
+              <span class="pull-left thumb-sm m-r"><img src="img/a1.jpg" alt="..." class="img-circle"></span>
+              <a href="#" class="text-muted" ui-toggle-class="show" target=".app-aside-right"><i class="fa fa-comment-o pull-right m-t-sm text-sm"></i></a>
+              <div class="clear">
+                <div><a href="">Chris Fox</a></div>
+                <small class="text-muted">about 2 minutes ago</small>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <span class="pull-left thumb-sm m-r"><img src="img/a2.jpg" alt="..." class="img-circle"></span>
+              <a href="#" class="text-muted" ui-toggle-class="show" target=".app-aside-right"><i class="fa fa-comment-o pull-right m-t-sm text-sm"></i></a>
+              <div class="clear">
+                <div><a href="">Amanda Conlan</a></div>
+                <small class="text-muted">about 2 hours ago</small>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <span class="pull-left thumb-sm m-r"><img src="img/a3.jpg" alt="..." class="img-circle"></span>
+              <a href="" class="text-muted" ui-toggle-class="show" target=".app-aside-right"><i class="fa fa-comment-o pull-right m-t-sm text-sm"></i></a>
+              <div class="clear">
+                <div><a href="">Dan Doorack</a></div>
+                <small class="text-muted">3 days ago</small>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <span class="pull-left thumb-sm m-r"><img src="img/a4.jpg" alt="..." class="img-circle"></span>
+              <a href="" class="text-muted" ui-toggle-class="show" target=".app-aside-right"><i class="fa fa-comment-o pull-right m-t-sm text-sm"></i></a>
+              <div class="clear">
+                <div><a href="">Lauren Taylor</a></div>
+                <small class="text-muted">about 2 minutes ago</small>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div role="tabpanel" class="tab-pane tab-3" id="tab-3">
+        <div class="wrapper-md">
+          <div class="m-b-sm text-md">Transaction</div>
+          <ul class="list-group list-group-sm list-group-sp list-group-alt auto m-t">
+            <li class="list-group-item">
+              <span class="text-muted">Transfer to Jacob at 3:00 pm</span>
+              <span class="block text-md text-info">B 15,000.00</span>
+            </li>
+            <li class="list-group-item">
+              <span class="text-muted">Got from Mike at 1:00 pm</span>
+              <span class="block text-md text-primary">B 23,000.00</span>
+            </li>
+            <li class="list-group-item">
+              <span class="text-muted">Sponsored ORG at 9:00 am</span>
+              <span class="block text-md text-warning">B 3,000.00</span>
+            </li>
+            <li class="list-group-item">
+              <span class="text-muted">Send to Jacob at 8:00 am</span>
+              <span class="block text-md">B 11,000.00</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="padder-md">
+      <!-- streamline -->
+      <div class="m-b text-md">Recent Activity</div>
+      <div class="streamline b-l m-b">
+        <div class="sl-item">
+          <div class="m-l">
+            <div class="text-muted">5 minutes ago</div>
+            <p><a href="" class="text-info">Jessi</a> commented your post.</p>
+          </div>
+        </div>
+        <div class="sl-item">
+          <div class="m-l">
+            <div class="text-muted">11:30</div>
+            <p>Join comference</p>
+          </div>
+        </div>
+        <div class="sl-item b-success b-l">
+          <div class="m-l">
+            <div class="text-muted">10:30</div>
+            <p>Call to customer <a href="" class="text-info">Jacob</a> and discuss the detail.</p>
+          </div>
+        </div>
+        <div class="bg-info wrapper-sm m-l-n m-r-n m-b r r-2x">
+          Create tasks for the team
+        </div>
+        <div class="sl-item b-primary b-l">
+          <div class="m-l">
+            <div class="text-muted">Wed, 25 Mar</div>
+            <p>Finished task <a href="" class="text-info">Testing</a>.</p>
+          </div>
+        </div>
+        <div class="sl-item b-warning b-l">
+          <div class="m-l">
+            <div class="text-muted">Thu, 10 Mar</div>
+            <p>Trip to the moon</p>
+          </div>
+        </div>
+        <div class="sl-item b-info b-l">
+          <div class="m-l">
+            <div class="text-muted">Sat, 5 Mar</div>
+            <p>Prepare for presentation</p>
+          </div>
+        </div>
+        <div class="sl-item b-l">
+          <div class="m-l">
+            <div class="text-muted">Sun, 11 Feb</div>
+            <p><a href="" class="text-info">Jessi</a> assign you a task <a href="" class="text-info">Mockup Design</a>.</p>
+          </div>
+        </div>
+        <div class="sl-item b-l">
+          <div class="m-l">
+            <div class="text-muted">Thu, 17 Jan</div>
+            <p>Follow up to close deal</p>
+          </div>
+        </div>
+      </div>
+      <!-- / streamline -->
+    </div>
+    <!-- ngInclude: 'tpl/blocks/aside.right.html' --><div data-ng-include=" 'tpl/blocks/aside.right.html' " class="ng-scope">
+  <!-- aside right -->
+  <div class="app-aside-right pos-fix no-padder w-md w-auto-xs bg-white b-l animated fadeInRight hide ng-scope">
+    <div class="vbox">
+      <div class="wrapper b-b b-t b-light m-b">
+        <a href="" class="pull-right text-muted text-md" ui-toggle-class="show" target=".app-aside-right"><i class="icon-close"></i></a>
+        Chat
+      </div>
+      <div class="row-row">
+        <div class="cell">
+          <div class="cell-inner padder">
+            <!-- chat list -->
+            <div class="m-b">
+              <a href="" class="pull-left thumb-xs avatar"><img src="img/a2.jpg" alt="..."></a>
+              <div class="clear">
+                <div class="pos-rlt wrapper-sm b b-light r m-l-sm">
+                  <span class="arrow left pull-up"></span>
+                  <p class="m-b-none">Hi John, What's up...</p>
+                </div>
+                <small class="text-muted m-l-sm"><i class="fa fa-ok text-success"></i> 2 minutes ago</small>
+              </div>
+            </div>
+            <div class="m-b">
+              <a href="" class="pull-right thumb-xs avatar"><img src="img/a3.jpg" class="img-circle" alt="..."></a>
+              <div class="clear">
+                <div class="pos-rlt wrapper-sm bg-light r m-r-sm">
+                  <span class="arrow right pull-up arrow-light"></span>
+                  <p class="m-b-none">Lorem ipsum dolor :)</p>
+                </div>
+                <small class="text-muted">1 minutes ago</small>
+              </div>
+            </div>
+            <div class="m-b">
+              <a href="" class="pull-left thumb-xs avatar"><img src="img/a2.jpg" alt="..."></a>
+              <div class="clear">
+                <div class="pos-rlt wrapper-sm b b-light r m-l-sm">
+                  <span class="arrow left pull-up"></span>
+                  <p class="m-b-none">Great!</p>
+                </div>
+                <small class="text-muted m-l-sm"><i class="fa fa-ok text-success"></i>Just Now</small>
+              </div>
+            </div>
+            <!-- / chat list -->
+          </div>
+        </div>
+      </div>
+      <div class="wrapper m-t b-t b-light">
+        <form class="m-b-none ng-pristine ng-valid">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Say something">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">SEND</button>
+            </span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- / aside right -->
+</div>
+  </div>
+  <!-- / right col -->
+</div>
+</div>
+  </div>
+  <!-- /content -->
+
+  <!-- footer -->
+  <div class="app-footer wrapper b-t bg-light ng-scope">
+    <span class="pull-right ng-binding">2.2.0 <a href="" ui-scroll-to="app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
+    © 2016 Copyright.
+  </div>
+  <!-- / footer -->
+
+  <!-- ngInclude: 'tpl/blocks/settings.html' --><div data-ng-include=" 'tpl/blocks/settings.html' " class="settings panel panel-default ng-scope"><!-- settings -->
+  <button class="btn btn-default no-shadow pos-abt ng-scope" ui-toggle-class="active" target=".settings">
+    <i class="fa fa-spin fa-gear"></i>
+  </button>
+  <div class="panel-heading ng-scope">
+    <a class="pull-right btn btn-xs btn-rounded btn-danger" href="http://themeforest.net/item/angulr-bootstrap-admin-web-app-with-angularjs/8437259?ref=flatfull">BUY</a>
+    Settings
+  </div>
+  <div class="panel-body ng-scope">
+    <div class="m-b-sm">
+      <label class="i-switch bg-info pull-right">
+        <input type="checkbox" ng-model="app.settings.headerFixed" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="true" aria-invalid="false">
+        <i></i>
+      </label>
+      Fixed header
+    </div>
+    <div class="m-b-sm">
+      <label class="i-switch bg-info pull-right">
+        <input type="checkbox" ng-model="app.settings.asideFixed" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="true" aria-invalid="false">
+        <i></i>
+      </label>
+      Fixed aside
+    </div>
+    <div class="m-b-sm">
+      <label class="i-switch bg-info pull-right">
+        <input type="checkbox" ng-model="app.settings.asideFolded" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="false" aria-invalid="false">
+        <i></i>
+      </label>
+      Folded aside
+    </div>
+    <div class="m-b-sm">
+      <label class="i-switch bg-info pull-right">
+        <input type="checkbox" ng-model="app.settings.asideDock" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="false" aria-invalid="false">
+        <i></i>
+      </label>
+      Dock aside
+    </div>
+    <div>
+      <label class="i-switch bg-info pull-right">
+        <input type="checkbox" ng-model="app.settings.container" class="ng-pristine ng-untouched ng-valid" tabindex="0" aria-checked="false" aria-invalid="false">
+        <i></i>
+      </label>
+      Boxed layout
+    </div>
+  </div>
+  <div class="wrapper b-t b-light bg-light lter r-b ng-scope">
+    <div class="row row-sm">
+      <div class="col-xs-6">
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-black';
+          app.settings.navbarCollapseColor='bg-white-only';
+          app.settings.asideColor='bg-black';
+         " role="button" tabindex="0">
+          <input type="radio" name="a" ng-model="app.settings.themeID" value="1" class="ng-pristine ng-untouched ng-valid" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-black header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-black"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-dark';
+          app.settings.navbarCollapseColor='bg-white-only';
+          app.settings.asideColor='bg-dark';
+         " role="button" tabindex="0">
+          <input type="radio" name="a" ng-model="app.settings.themeID" value="13" class="ng-pristine ng-untouched ng-valid" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-dark header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-dark"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-white-only';
+          app.settings.navbarCollapseColor='bg-white-only';
+          app.settings.asideColor='bg-black';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="2" class="ng-pristine ng-untouched ng-valid" name="751" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-white header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-black"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-primary';
+          app.settings.navbarCollapseColor='bg-white-only';
+          app.settings.asideColor='bg-dark';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="3" class="ng-pristine ng-untouched ng-valid" name="752" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-primary header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-dark"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-info';
+          app.settings.navbarCollapseColor='bg-white-only';
+          app.settings.asideColor='bg-black';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="4" class="ng-pristine ng-untouched ng-valid" name="753" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-info header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-black"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-success';
+          app.settings.navbarCollapseColor='bg-white-only';
+          app.settings.asideColor='bg-dark';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="5" class="ng-pristine ng-untouched ng-valid" name="754" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-success header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-dark"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block" ng-click="
+          app.settings.navbarHeaderColor='bg-danger';
+          app.settings.navbarCollapseColor='bg-white-only';
+          app.settings.asideColor='bg-dark';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="6" class="ng-pristine ng-untouched ng-valid" name="755" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-danger header"></b>
+            <b class="bg-white header"></b>
+            <b class="bg-dark"></b>
+          </span>
+        </label>
+      </div>
+      <div class="col-xs-6">
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-black';
+          app.settings.navbarCollapseColor='bg-black';
+          app.settings.asideColor='bg-white b-r';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="7" class="ng-pristine ng-untouched ng-valid" name="756" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-black header"></b>
+            <b class="bg-black header"></b>
+            <b class="bg-white"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-dark';
+          app.settings.navbarCollapseColor='bg-dark';
+          app.settings.asideColor='bg-light';
+         " role="button" tabindex="0">
+          <input type="radio" name="a" ng-model="app.settings.themeID" value="14" class="ng-pristine ng-untouched ng-valid" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-dark header"></b>
+            <b class="bg-dark header"></b>
+            <b class="bg-light"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-info dker';
+          app.settings.navbarCollapseColor='bg-info dker';
+          app.settings.asideColor='bg-light dker b-r';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="8" class="ng-pristine ng-untouched ng-valid" name="757" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-info dker header"></b>
+            <b class="bg-info dker header"></b>
+            <b class="bg-light dker"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-primary';
+          app.settings.navbarCollapseColor='bg-primary';
+          app.settings.asideColor='bg-dark';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="9" class="ng-pristine ng-untouched ng-valid" name="758" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-primary header"></b>
+            <b class="bg-primary header"></b>
+            <b class="bg-dark"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-info dker';
+          app.settings.navbarCollapseColor='bg-info dk';
+          app.settings.asideColor='bg-black';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="10" class="ng-pristine ng-untouched ng-valid" name="759" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-info dker header"></b>
+            <b class="bg-info dk header"></b>
+            <b class="bg-black"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block m-b-sm" ng-click="
+          app.settings.navbarHeaderColor='bg-success';
+          app.settings.navbarCollapseColor='bg-success';
+          app.settings.asideColor='bg-dark';
+          " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="11" class="ng-pristine ng-untouched ng-valid" name="760" aria-checked="false" tabindex="-1" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-success header"></b>
+            <b class="bg-success header"></b>
+            <b class="bg-dark"></b>
+          </span>
+        </label>
+
+        <label class="i-checks block" ng-click="
+          app.settings.navbarHeaderColor='bg-danger dker bg-gd';
+          app.settings.navbarCollapseColor='bg-danger dker bg-gd';
+          app.settings.asideColor='bg-dark';
+         " role="button" tabindex="0">
+          <input type="radio" ng-model="app.settings.themeID" value="12" class="ng-pristine ng-untouched ng-valid" name="761" aria-checked="true" tabindex="0" aria-invalid="false">
+          <span class="block bg-light clearfix pos-rlt">
+            <span class="active pos-abt w-full h-full bg-black-opacity text-center">
+              <i class="glyphicon glyphicon-ok text-white m-t-xs"></i>
+            </span>
+            <b class="bg-danger dker header"></b>
+            <b class="bg-danger dker header"></b>
+            <b class="bg-dark"></b>
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+<!-- /settings -->
+</div>
+</div>
+
+<script src="js/app.angular.js"></script>
+  <!-- Lazy loading -->
+
+
+<script src="../libs/jquery/flot/jquery.flot.js"></script><script src="../libs/jquery/flot/jquery.flot.pie.js"></script><script src="../libs/jquery/flot/jquery.flot.resize.js"></script><script src="../libs/jquery/flot.tooltip/js/jquery.flot.tooltip.min.js"></script><script src="../libs/jquery/flot.orderbars/js/jquery.flot.orderBars.js"></script><script src="../libs/jquery/flot-spline/js/jquery.flot.spline.min.js"></script><script src="../libs/jquery/jquery.easy-pie-chart/dist/jquery.easypiechart.fill.js"></script><div class="flotTip" style="display: none; position: absolute; left: 1064px; top: 324px;"></div><script src="../libs/jquery/screenfull/dist/screenfull.min.js"></script><script src="../libs/jquery/jquery.sparkline/dist/jquery.sparkline.retina.js"></script><script src="../libs/jquery/datatables/media/js/jquery.dataTables.min.js"></script><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="https://www.gstatic.com/images/branding/product/1x/translate_24dp.png" width="20" height="20" alt="Google Translate"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">Original text</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">Contribute a better translation</span><span class="activity-link"></span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div><script src="../libs/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.js"></script><div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div>
+</body>
+</html>
